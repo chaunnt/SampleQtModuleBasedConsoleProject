@@ -1,0 +1,16 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>resource/spinner.png</file>
+        <file>ScreenHome.qml</file>
+        <file>resource/logo.png</file>
+        <file>CustomButton.qml</file>
+        <file>CustomTextBox.qml</file>
+        <file>ScreenChangePassword.qml</file>
+        <file>ScreenForgotPassword.qml</file>
+        <file>ScreenLogin.qml</file>
+        <file>resource/Home_White.png</file>
+        <file>resource/LeftArrow_White.png</file>
+        <file>Setting.qml</file>
+    </qresource>
+</RCC>
