@@ -1,9 +1,18 @@
-QT += quick network sql
-CONFIG += c++11
+!include(SampleModule/SampleModule.pri){
+    error("Couldn't include the SampleModule.pri file")
+}
 
-!include(Framework/Framework.pri) {
+!include(Framework/Framework.pri){
     error("Couldn't include the Framework.pri file")
 }
+
+!include(Setting/Setting.pri){
+    error("Couldn't include the Setting.pri file")
+}
+
+QT -= gui
+QT += network sql
+CONFIG += c++11 console
 
 # The following define makes your compiler emit warnings if you use
 # any feature of Qt which as been marked deprecated (the exact warnings
@@ -27,55 +36,15 @@ android: {
         $$PWD/resource/lib/libssl.so
 }
 
-
-SOURCES += AppManager.cpp \
-    Model/AppUser.cpp
-HEADERS += AppManager.h \
-    Model/AppUser.h
-
-SOURCES += Model/SimpleData.cpp
-HEADERS += Model/SimpleData.h
-
-SOURCES += main.cpp
-
-RESOURCES += qml.qrc
-
-# Additional import path used to resolve QML modules in Qt Creator's code model
-QML_IMPORT_PATH =
-
-# Additional import path used to resolve QML modules just for Qt Quick Designer
-QML_DESIGNER_IMPORT_PATH =
+SOURCES += main.cpp \
+    AppManager.cpp \
+    ApplicationInitializer.cpp
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
-DISTFILES += \
-    android/AndroidManifest.xml \
-    android/res/values/strings.xml \
-    ios/Project-Info.plist \
-    android/res/drawable-hdpi/ic_launcher.png \
-    android/res/drawable-mdpi/ic_launcher.png \
-    android/res/drawable-xhdpi/ic_launcher.png \
-    android/res/drawable-xxhdpi/ic_launcher.png \
-    ios/Def-568h@2x.png \
-    ios/Def-667h@2x.png \
-    ios/Def-Portrait-736h@3x.png \
-    ios/Def-Portrait.png \
-    ios/Def-Portrait@2x.png \
-    ios/Def.png \
-    ios/Def@2x.png \
-    ios/Icon-60.png \
-    ios/Icon-60@2x.png \
-    ios/Icon-60@3x.png \
-    ios/Icon-72.png \
-    ios/Icon-72@2x.png \
-    ios/Icon-76.png \
-    ios/Icon-76@2x.png \
-    ios/Icon-Small-40.png \
-    ios/Icon-Small-40@2x.png \
-    ios/Icon-Small-50.png \
-    ios/Icon-Small-50@2x.png \
-    ios/Icon.png \
-    ios/Icon@2x.png
+HEADERS += \
+    AppManager.h \
+    ApplicationInitializer.h
