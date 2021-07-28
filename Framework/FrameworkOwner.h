@@ -3,9 +3,9 @@
 #include <QObject>
 #include <memory>
 
-#include "Framework/Utils/QtSingleton.h"
-#include "Framework/CommonFunctions/CommonFunctions.h"
-#include "Framework/DBCommunication/DBLocalBase.h"
+#include "Utils/QtSingleton.h"
+#include "CommonFunctions/CommonFunctions.h"
+#include "DBCommunication/DBLocalBase.h"
 
 ///Use this to output stderr
 //#define TRACE_LOG(log) qDebug() << Q_FUNC_INFO << "(" << __LINE__ << ")" << log
@@ -14,6 +14,7 @@
 ///Use this to output to stdout
 #define TRACE_LOG(log) QTextStream(stdout) << Q_FUNC_INFO << " (" << __LINE__ << ") " << log << "\r\n"
 #define TRACE_NAKED(log) QTextStream(stdout) << log << " \r\n"
+#define ERROR_LOG(log) QTextStream(stdout) << "ERROR: " << log << " \r\n"
 
 /**
  * @brief Class contain all functions related to Utils
@@ -37,10 +38,9 @@ public:
     CommonFunctions* getCommonFunctions();
 private:
 
-    volatile bool m_deleting = false;
 
-    CommonFunctions* m_pCommonFunctions; //Owner of this object
-    DBLocalBase* m_pDBLocalBase; //Owner of this object
+    QScopedPointer<CommonFunctions> m_pCommonFunctions; ///Owner of this object
+    QScopedPointer<DBLocalBase> m_pDBLocalBase; ///Owner of this object
 
     FrameworkOwner();
     virtual ~FrameworkOwner();

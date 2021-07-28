@@ -13,5 +13,6 @@ class CommonFunctions
 public:
     CommonFunctions();
     void AddTraceLog(QString strLog);
-    void exportJson(QString strFileName, QJsonDocument jsDoc);
+    void exportJson(QString& strFileName, QJsonDocument& jsDoc);
+    QJsonDocument loadJson(QString& strFileName);
 };

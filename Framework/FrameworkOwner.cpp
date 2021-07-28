@@ -13,18 +13,6 @@ FrameworkOwner::~FrameworkOwner()
 
 void FrameworkOwner::_onAboutToQuit()
 {
-    if(m_pDBLocalBase)
-    {
-        delete m_pDBLocalBase;
-        m_pDBLocalBase = nullptr;
-    }
-
-    if(m_pCommonFunctions)
-    {
-        delete m_pCommonFunctions;
-        m_pCommonFunctions = nullptr;
-    }
-
     QtSingleton<FrameworkOwner>::onAboutToQuit();
 }
 
@@ -35,18 +23,18 @@ FrameworkOwner *FrameworkOwner::getInstance()
 
 void FrameworkOwner::createObjects()
 {
-    m_pDBLocalBase = new DBLocalBase;
+    m_pDBLocalBase.reset(new DBLocalBase);
     m_pDBLocalBase->createDB();
 
-    m_pCommonFunctions = new CommonFunctions;
+    m_pCommonFunctions.reset(new CommonFunctions);
 }
 
 DBLocalBase* FrameworkOwner::getDBLocalBase()
 {
-    return m_pDBLocalBase;
+    return m_pDBLocalBase.data();
 }
 
 CommonFunctions* FrameworkOwner::getCommonFunctions()
 {
-    return m_pCommonFunctions;
+    return m_pCommonFunctions.data();
 }
